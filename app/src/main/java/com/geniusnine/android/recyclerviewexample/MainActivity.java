@@ -27,12 +27,13 @@ public class MainActivity extends AppCompatActivity {
 RecyclerView recyclerViewContents;
     AdmobRecyclerAdapterWrapper adapterWrapper;
     Timer updateAdsTimer;
+    private ArrayList<String> items = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+contentGenerator();
 
         MobileAds.initialize(getApplicationContext(), getString(R.string.test_admob_app_id));
         initRecyclerViewItems();
@@ -44,16 +45,16 @@ RecyclerView recyclerViewContents;
         recyclerViewContents = (RecyclerView)findViewById(R.id.recyclerViewContent);
         recyclerViewContents.setLayoutManager(new LinearLayoutManager((this)));
 
-        ContentAdapter recyclerViewContentsAdapter = new ContentAdapter(this);
+        ContentAdapter recyclerViewContentsAdapter = new ContentAdapter(this, items);
 
         adapterWrapper =  new AdmobRecyclerAdapterWrapper(this, getString(R.string.test_admob_app_id) );
 
         adapterWrapper.setAdapter(recyclerViewContentsAdapter);
 
 
-        adapterWrapper.setLimitOfAds(3);
+        adapterWrapper.setLimitOfAds(100);
 
-        adapterWrapper.setNoOfDataBetweenAds(10);
+        adapterWrapper.setNoOfDataBetweenAds(1);
         adapterWrapper.setFirstAdIndex(2);
 
 
@@ -80,6 +81,14 @@ RecyclerView recyclerViewContents;
     }
 
 
+    private void contentGenerator() {
 
+        String alpha = "This is \n Awesome \n working\nGreat\n..........# ";
+        for (int i = 0; i < 101; i++) {
+            items.add(alpha + Integer.toString(i));
+
+        }
+
+    }
 
 }

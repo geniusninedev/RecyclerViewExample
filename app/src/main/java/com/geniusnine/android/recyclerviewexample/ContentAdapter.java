@@ -17,9 +17,10 @@ public class ContentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private ArrayList<String> items = new ArrayList<>();
     private Context mContext;
 
-    public ContentAdapter(Context context){
+    public ContentAdapter(Context context, ArrayList<String> items){
+        this.items = items;
         mContext = context;
-        contentGenerator();
+        //contentGenerator();
     }
 
     @Override
